@@ -31,7 +31,9 @@ def composite_identity(f, g):
     >>> b1(4)                            # (4 + 1)^2 != 4^2 + 1
     False
     """
-    "*** YOUR CODE HERE ***"
+    def sub_func(x):
+        return composer(f,g)(x) == composer(g, f)(x)
+    return sub_func
 
 
 def count_cond(condition):
@@ -61,7 +63,13 @@ def count_cond(condition):
     >>> count_primes(20)   # 2, 3, 5, 7, 11, 13, 17, 19
     8
     """
-    "*** YOUR CODE HERE ***"
+    def sub_func(n):
+        result = 0
+        for i in range(1, n + 1):
+            if(condition(n, i)):
+                result += 1
+        return result
+    return sub_func
 
 
 def multiple(a, b):
@@ -72,8 +80,13 @@ def multiple(a, b):
     >>> multiple(14, 21)
     42
     """
-    "*** YOUR CODE HERE ***"
-
+    factor = 1
+    for i in range(2, min(a, b)):
+        if(a % i == 0 and b % i == 0):
+            factor = factor * i
+            a = a  / i
+            b = b / i
+    return int(a*b*factor)
 
 def cycle(f1, f2, f3):
     """Returns a function that is itself a higher-order function.
@@ -101,4 +114,17 @@ def cycle(f1, f2, f3):
     >>> do_two_cycles(1)
     19
     """
-    "*** YOUR CODE HERE ***"
+    def sub_func(n):
+        def apply_functions(x, count):
+            if count == 0:
+                return x
+            elif count % 3 == 1:
+                return f1(apply_functions(x, count - 1))
+            elif count % 3 == 2:
+                return f2(apply_functions(x, count - 1))
+            else:  # count % 3 == 0
+                return f3(apply_functions(x, count - 1))
+
+        return lambda x: apply_functions(x, n)
+
+    return sub_func
