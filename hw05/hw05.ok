@@ -1,25 +1,25 @@
 {
-    "name": "Lab 6",
-    "endpoint": "cal/cs61a/su20/lab06",
+    "name": "Homework 5",
+    "endpoint": "cal/cs61a/sp23/hw05",
     "src": [
-        "lab06.py"
+        "hw05.py"
     ],
     "tests": {
-        "lab*.py": "doctest",
+        "hw*.py": "doctest",
         "tests/*.py": "ok_test"
     },
     "default_tests": [
-        "make_adder_inc",
-        "make_fib",
-        "insert_items",
-        "list-mutation"
+        "hailstone",
+        "merge",
+        "perms",
+        "yield_paths"
     ],
     "protocols": [
         "restore",
         "file_contents",
+        "analytics",
         "unlock",
         "grading",
-        "analytics",
         "backup"
     ]
 }
